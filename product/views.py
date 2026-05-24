@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Product,Category
+from .forms import ContactForm
 
 # Create your views here.
 
@@ -25,3 +26,18 @@ def category_products(request, category_id):
         'products': products
     }
     return render(request, 'category/products.html', context)
+
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+            return render(request, 'success.html')
+    else:
+        form = ContactForm()
+    context = {
+        'form': form
+    }
+    return render(request, 'contact.html', context)
