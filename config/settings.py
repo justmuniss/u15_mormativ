@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "product_u15",
+        "NAME": "u_15_normativ",
         "USER": "postgres",
         "PASSWORD": "6664",
         "HOST": "127.0.0.1",
@@ -118,5 +118,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
+AUTH_USER_MODEL = 'product.CustomUser'
 
 STATIC_URL = 'static/'
