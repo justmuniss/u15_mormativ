@@ -17,6 +17,7 @@ class BookForm(forms.ModelForm):
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
     phone_number = forms.CharField(required=True)
+
     class Meta:
         model = CustomUser
         fields = ('username', 'email', 'phone_number', 'password1', 'password2')
@@ -26,9 +27,7 @@ class RegisterForm(UserCreationForm):
         password1 = cleaned_data.get("password1")
         password2 = cleaned_data.get("password2")
 
-
         if password1 and password2 and password1 != password2:
-                raise forms.ValidationError("Parollar bir xil emas!")
+            raise forms.ValidationError("Parollar bir xil emas!")
 
-
-            return cleaned_data
+        return cleaned_data

@@ -6,3 +6,19 @@
 
 <a href="{% url 'home' %}">Home</a>
 <a href="{% url 'logout' %}">Logout</a>
+
+
+<h1>Dashboard</h1>
+
+<p>Salom, {{ user.username }}</p>
+
+{% if user.role == "admin" %}
+    <p style="color:red;">Siz adminsiz</p>
+
+{% elif user.role == "teacher" %}
+    <p style="color:blue;">Siz o‘qituvchisiz</p>
+
+{% elif user.role == "student" %}
+    <p style="color:green;">Siz o‘quvchisiz</p>
+
+{% endif %}

@@ -6,4 +6,11 @@ from product.models import Product, Category,Book,CustomUser
 admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Book)
-admin.site.register(CustomUser, UserAdmin)
+class CustomUserAdmin(UserAdmin):
+    fieldsets = UserAdmin.fieldsets + (
+        ("Qo‘shimcha ma'lumotlar", {
+            "fields": ("phone_number", "role")
+        }),
+    )
+
+admin.site.register(CustomUser, CustomUserAdmin)
