@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Product,Category,Book
-from .forms import ContactForm,BookForm
+from .forms import ContactForm,BookForm,RegisterForm
 
 # Create your views here.
 
@@ -96,3 +96,17 @@ def book_delete(request, id):
         'book': book
     }
     return render(request, 'book/delete.html', context)
+
+
+def register_view(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+
+
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # login sahifaga yo'naltiradi
+    else:
+        form = RegisterForm()
+
+    return render(request, 'register.html', {'form': form})
