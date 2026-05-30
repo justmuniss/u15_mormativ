@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404,redirect
 from .models import Product,Category,Book
 from .forms import ContactForm,BookForm,RegisterForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -136,3 +137,13 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('register_view')
+
+
+@login_required
+def profile_view(request):
+    user = request.user
+
+    return render(request, 'profile.html', {
+        'user': user
+    })
+
