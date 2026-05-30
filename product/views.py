@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404,redirect
 from .models import Product,Category,Book
 from .forms import ContactForm,BookForm,RegisterForm
+from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
@@ -110,3 +111,28 @@ def register_view(request):
         form = RegisterForm()
 
     return render(request, 'register.html', {'form': form})
+
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+
+def login_view(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')  # login bo‘lsa home ga o‘tadi
+        else:
+            return render(request, 'login.html', {
+                'error': "Username yoki password noto‘g‘ri"
+            })
+
+    return render(request, 'login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('register_view')
