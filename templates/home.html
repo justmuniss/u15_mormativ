@@ -1,11 +1,18 @@
-<h1>Home sahifa</h1>
+<h1>Home</h1>
 
-{% if user.is_authenticated %}
-    <p>Salom, {{ user.username }}!</p>
+<p>User: {{ user.username }}</p>
 
-    <a href="{% url 'logout' %}">Logout</a>
+<h3>Groups:</h3>
 
-{% else %}
-    <a href="{% url 'login' %}">Kirish</a>
-    <a href="{% url 'register' %}">Ro‘yxatdan o‘tish</a>
+{% for group in user.groups.all %}
+    <p>{{ group.name }}</p>
+{% empty %}
+    <p>Hech qanday group yo‘q</p>
+{% endfor %}
+{% if user.groups.filter(name="Managers").exists %}
+    <a href="/manager-panel/">Manager Panel</a>
 {% endif %}
+{% if user.groups.filter(name="Editors").exists %}
+    <p>Siz Editor groupidasiz</p>
+{% endif %}
+

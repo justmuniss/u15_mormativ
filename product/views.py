@@ -147,3 +147,5 @@ def profile_view(request):
         'user': user
     })
 
+def home(request):
+    return render(request, 'home.html')
