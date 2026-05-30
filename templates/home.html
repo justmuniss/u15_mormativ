@@ -16,3 +16,6 @@
     <p>Siz Editor groupidasiz</p>
 {% endif %}
 
+{% if user.has_perm "product.add_product" %}
+    <a href="{% url 'product_create' %}">Product qo‘shish</a>
+{% endif %}

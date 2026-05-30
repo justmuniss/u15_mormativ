@@ -11,6 +11,13 @@ def product_list(request):
     context = {'products': products}
     return render(request, 'product/list.html', context)
 
+def product_create(request):
+
+    if not request.user.has_perm("product.add_product"):
+        return render(request, "no_permission.html")
+
+    return render(request, "product/create.html")
+
 
 def category_list(request):
     categories = Category.objects.all()
